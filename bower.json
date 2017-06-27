@@ -18,6 +18,7 @@
     "type": "git",
     "url": "git://github.com/LssPolymerElements/iron-demo-helpers.git"
   },
+  "private": false,
   "license": "http://polymer.github.io/LICENSE.txt",
   "homepage": "https://github.com/LssPolymerElements/iron-demo-helpers",
   "ignore": [],
