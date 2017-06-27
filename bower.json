@@ -13,8 +13,7 @@
   "main": [
     "demo-snippet.html",
     "url-bar.html"
-  ],
-  "private": true,
+  ], 
   "repository": {
     "type": "git",
     "url": "git://github.com/LssPolymerElements/iron-demo-helpers.git"
