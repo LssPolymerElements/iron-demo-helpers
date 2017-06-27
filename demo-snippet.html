@@ -52,12 +52,12 @@ Custom property | Description | Default
 <dom-module id="demo-snippet">
   <template>
     <style include="prism-theme-default">
-      :host {
+       :host {
         display: block;
 
         box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-                    0 1px 5px 0 rgba(0, 0, 0, 0.12),
-                    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+        0 1px 5px 0 rgba(0, 0, 0, 0.12),
+        0 3px 1px -2px rgba(0, 0, 0, 0.2);
         margin-bottom: 40px;
         @apply --demo-snippet;
       }
@@ -89,7 +89,8 @@ Custom property | Description | Default
         overflow: auto;
         @apply(--demo-snippet-code);
       }
-      .code > pre {
+
+      .code>pre {
         margin: 0;
         padding: 0 0 10px 0;
       }
@@ -113,7 +114,7 @@ Custom property | Description | Default
 
     <div class="code-container">
       <marked-element markdown="[[_markdown]]" id="marked">
-         <div class="code" slot="markdown-html" id="code"></div>
+        <div class="code" slot="markdown-html" id="code"></div>
       </marked-element>
       <button id="copyButton" title="copy to clipboard" on-tap="_copyToClipboard">Copy</button>
     </div>
@@ -131,21 +132,21 @@ Custom property | Description | Default
         }
       },
 
-      attached: function() {
-        this._observer = Polymer.dom(this.$.content).observeNodes(function(info) {
+      attached: function () {
+        this._observer = Polymer.dom(this.$.content).observeNodes(function (info) {
           this._updateMarkdown();
         }.bind(this));
       },
 
-      detached: function() {
+      detached: function () {
         if (this._observer) {
           Polymer.dom(this.$.content).unobserveNodes(this._observer);
           this._observer = null;
         }
       },
 
-      _updateMarkdown: function() {
-        var template = Polymer.dom(this).queryDistributedElements('template')[0];
+      _updateMarkdown: function () {
+        var template = Polymer.dom(this).queryDistributedElements('code')[0];
 
         // If there's no template, render empty code.
         if (!template) {
@@ -160,7 +161,7 @@ Custom property | Description | Default
         this._markdown = '```\n' + snippet + '\n' + '```';
 
         // Stamp the template.
-        if (!template.hasAttribute('is')) {
+        if (template.content) {
           // Don't need to listen for more changes (since stamping the template
           // will trigger an observeNodes)
           Polymer.dom(this.$.content).unobserveNodes(this._observer);
@@ -169,7 +170,7 @@ Custom property | Description | Default
         }
       },
 
-      _copyToClipboard: function() {
+      _copyToClipboard: function () {
         // From https://github.com/google/material-design-lite/blob/master/docs/_assets/snippets.js
         var snipRange = document.createRange();
         snipRange.selectNodeContents(this.$.code);
@@ -193,7 +194,7 @@ Custom property | Description | Default
         return result;
       },
 
-      _resetCopyButtonState: function() {
+      _resetCopyButtonState: function () {
         this.$.copyButton.textContent = 'copy';
       },
     });
